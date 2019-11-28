@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/services/auth_service.dart';
 
 class SignupScreen extends StatefulWidget {
-
   static final String id = 'signup_screen';
 
   @override
@@ -9,23 +9,22 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
   final _formKey = GlobalKey<FormState>();
   String _email, _password, _name;
 
-  _submit() {
+  _submit(){
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      print(_email);
-      print(_password);
-      print(_name);
+      AuthService.signupUser(context, _name, _email, _password);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +84,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     Container(
                       width: 250.0,
                       child: FlatButton(
-                        onPressed: _submit,
+                        onPressed: () => _submit(),
                         color: Colors.blue,
                         child: Text(
                           'Signup',
@@ -111,7 +110,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               )
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
