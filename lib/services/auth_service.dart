@@ -25,7 +25,7 @@ class AuthService {
         //  We're using pushReplacmentNamed, instead of just "push",
         //  because when the user signs up, we don't want them to be able
         //  go back to signup screen
-        Navigator.pushReplacementNamed(context, FeedScreen.id);
+        Navigator.pop(context);
       }
     } catch (e) {
       print(e);
