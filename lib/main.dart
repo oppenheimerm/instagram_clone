@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, snapshot){
         if(snapshot.hasData){
           //  user logged in
-          return HomeScreen();
+          return HomeScreen(userId: snapshot.data.uid);
         }else{
           return LoginScreen();
         }
@@ -34,6 +34,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Instagram Clone',
+      theme: ThemeData(
+        primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+          color: Colors.black
+        )
+      ),
       debugShowCheckedModeBanner: false,
       home: _getScreenId(),
       routes: {
