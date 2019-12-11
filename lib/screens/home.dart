@@ -5,11 +5,12 @@ import 'package:instagram_clone/screens/create_post_screen.dart';
 import 'package:instagram_clone/screens/feed_screen.dart';
 import 'package:instagram_clone/screens/profile_screen.dart';
 import 'package:instagram_clone/screens/search_screen.dart';
+import 'package:instagram_clone/models/user_data.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String userId;
 
-  HomeScreen({this.userId});
+  HomeScreen();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -20,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController();
   }
@@ -28,25 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'Instagram',
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Billabong',
-              fontSize: 35.0,
-            ),
-          ),
-        ),
-      ),
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: _currentTab,
         onTap: (int index) {
           setState(() {
             _currentTab = index;
-            print('onTap() called! Current index: ${index}');
           });
           _pageController.animateToPage(
               index,
@@ -94,12 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchScreen(),
           CreatePostScreen(),
           ActivityScreen(),
-          ProfileScreen(userId: widget.userId,)
+          ProfileScreen(userId: Provider.of<UserData>(context).currentUserId)
         ],
         onPageChanged: (int index) {
           setState(() {
             _currentTab = index;
-            print('onPageChanged() called');
           });
         },
       ),
