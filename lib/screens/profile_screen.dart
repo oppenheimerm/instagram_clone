@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user.dart';
+import 'package:instagram_clone/models/user_data.dart';
 import 'package:instagram_clone/screens/edit_profile.dart';
 import 'package:instagram_clone/utilities/constants.dart';
+import 'package:instagram_clone/widgets/appbar_standard.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -14,10 +17,19 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
+  // Can only edit profile for self only
+  bool _isSelf(){
+    var isSelf = widget.userId == Provider.of<UserData>(context).currentUserId?
+    true :
+    false;
+    return isSelf;
+  }
 
   @override
   Widget build(BuildContext context) {
+    _isSelf();
     return Scaffold(
+      appBar: AppBarStandard.stdAppBar(),
       backgroundColor: Colors.white,
       body: FutureBuilder(
         future: usersRef.document(widget.userId).get(),
@@ -109,27 +121,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               )
                             ],
                           ),
-                          Container(
-                            width: 200.0,
-                            child: FlatButton(
-                              color: Colors.blue,
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => EditProfile(
-                                          user: user
-                                      )
-                                  )
-                              ),
-                              textColor: Colors.white,
-                              child: Text(
-                                'Edit Profile',
-                                style: TextStyle(
-                                    fontSize: 18.0
-                                ),
-                              ),
-                            ),
-                          ),
+                         // Conditional rendering starts
+                         // Only show edit profile button if self
+                         _isSelf()?
+                         Container(
+                           width: 200.0,
+                           child: FlatButton(
+                             color: Colors.blue,
+                             onPressed: () => Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                     builder: (_) => EditProfile(
+                                         user: user
+                                     )
+                                 )
+                             ),
+                             textColor: Colors.white,
+                             child: Text(
+                               'Edit Profile',
+                               style: TextStyle(
+                                   fontSize: 18.0
+                               ),
+                             ),
+                           ),
+                         ):
+                         new Container(width: 0, height: 0,
+                         ),
+                          // Conditional rendering ends
                         ],
                       ),
                     )
