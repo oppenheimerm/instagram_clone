@@ -46,4 +46,21 @@ class StorageService {
     );
     return compressedImageFile;
   }
+
+  static Future<String>uploadPost(File imageFile) async {
+    String photoId = Uuid().v4();
+    File image = await compressImage(photoId, imageFile);
+
+
+    //  Make an upload task, where we put the file in the exact location
+    //  in out firebase storage bucket
+    StorageUploadTask uploadTask = storageRef
+        .child('images/posts/posts_$photoId.jpg')
+        .putFile(image);
+
+    StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
+    String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
+    //  This is what we store in our database
+    return downloadUrl;
+  }
 }
