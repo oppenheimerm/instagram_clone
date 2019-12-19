@@ -10,6 +10,7 @@ class AppBarStandard {
             style: TextStyle(
                 color: Colors.black, fontFamily: 'Billabong', fontSize: 35.0),
           ),
-        ));
+        )
+    );
   }
 }

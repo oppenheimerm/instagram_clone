@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Instagram Clone',
         theme: ThemeData(
-          primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
-            color: Colors.black
-          )
+            primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+                color: Colors.black
+            )
         ),
         debugShowCheckedModeBanner: false,
         home: _getScreenId(),

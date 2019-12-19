@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/screens/profile_screen.dart';
 import 'package:instagram_clone/services/database_Service.dart';
-import 'package:instagram_clone/widgets/appbar_standard.dart';
 
 class SearchScreen extends StatefulWidget {
   @override

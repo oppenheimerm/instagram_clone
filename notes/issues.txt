@@ -1,0 +1,9 @@
+Image Cropper:
+    https://github.com/hnvn/flutter_image_cropper/blob/master/README.md
+
+    Add UCropActivity into your AndroidManifest.xml
+
+    <activity
+        android:name="com.yalantis.ucrop.UCropActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

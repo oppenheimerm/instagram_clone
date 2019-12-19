@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:instagram_clone/screens/feed_screen.dart';
-import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:instagram_clone/models/user_data.dart';
 
@@ -45,7 +43,7 @@ class AuthService {
   static void login(String email, String password) async{
 
     try{
-      print('sigining in with email: ${email} and password: ${password}');
+      //print('sigining in with email: ${email} and password: ${password}');
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     }
     catch(e){
